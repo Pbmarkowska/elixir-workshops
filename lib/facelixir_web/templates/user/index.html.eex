@@ -16,6 +16,13 @@
       <td><%= user.name %></td>
       <td><%= user.email %></td>
       <td><%= user.password %></td>
+      <td>
+      <%= if user.image do %>
+        <img src="<%= user.image %>"></img>
+      <% else %>
+        <img src="images/nicolas_cage.jpg"></img>
+      <% end %>
+      </td>
 
       <td class="text-right">
         <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
@@ -27,4 +34,6 @@
   </tbody>
 </table>
 
-<span><%= link "New User", to: user_path(@conn, :new) %></span>
+<span><%= link "Add New User", to: user_path(@conn, :new) %></span>
+<span><%= link "Generate New User", to: user_path(@conn, :download) %></span>
+

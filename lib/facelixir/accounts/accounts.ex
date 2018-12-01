@@ -18,7 +18,9 @@ defmodule Facelixir.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
+    User 
+    |> order_by(desc: :updated_at)
+    |> Repo.all
   end
 
   @doc """

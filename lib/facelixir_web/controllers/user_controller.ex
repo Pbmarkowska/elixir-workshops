@@ -57,4 +57,12 @@ defmodule FacelixirWeb.UserController do
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
   end
+
+  def download(conn, _params) do
+    Facelixir.Accounts.Downloader.perform
+    
+    conn
+    |> put_flash(:info, "User downloaded successfully.")
+    |> redirect(to: user_path(conn, :index))
+  end
 end
