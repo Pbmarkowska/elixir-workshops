@@ -3,6 +3,7 @@ defmodule FacelixirWeb.UserSocket do
 
   ## Channels
   # channel "room:*", FacelixirWeb.RoomChannel
+  channel "random", FacelixirWeb.RandomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
