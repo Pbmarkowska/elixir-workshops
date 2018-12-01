@@ -56,17 +56,28 @@ let channel = socket.channel("random", {});
 let list    = $('#message-list');
 let message = $('#message');
 let name    = $('#name');
+let age = $('#age');
 
 message.on('keypress', event => {
   if (event.keyCode == 13) {
-    channel.push('shout', { name: name.val(), message: message.val() });
+    console.log('Random text')
+    channel.push('shout', { name: name.val(), message: message.val(), age: age.val() });
     message.val('');
   }
 });
 
 channel.on('shout', payload => {
-  list.append(`<b>${payload.name || 'Anonymous'}:</b> ${payload.message}<br>`);
+  list.append(`<b>${payload.name || 'Anonymous'} (${payload.age}): </b> ${payload.message}<br>`);
   list.prop({scrollTop: list.prop("scrollHeight")});
+});
+
+channel.on('messages_history', messages => {
+  let messages_list = messages["messages"];
+
+  messages_list.forEach( function(msg) {
+    list.append(`<b>${msg["name"] || 'Anonymous'} (${msg["age"] || "-"}): </b> ${msg["message"]}<br>`);
+    list.prop({scrollTop: list.prop("scrollHeight")});
+  });
 });
 
 channel.join()
